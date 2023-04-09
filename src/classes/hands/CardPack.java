@@ -1,10 +1,11 @@
-package Cards;
+package classes.hands;
 
 import java.util.*;
 
-/**
- * 52 хөзөр бий болгох
- */
+import classes.cards.Card;
+import classes.cards.Face;
+import classes.cards.Suit;
+
 public class CardPack extends Stack<Card>
 {
     public static final int CARDS_IN_PACK = 52;
@@ -13,7 +14,7 @@ public class CardPack extends Stack<Card>
     {
         super();
         
-        final String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        final String[] suits = {"Бунд", "Гил", "Цэцэг", "Дөрвөлжин"};
         
         int cardCode = 1;
         

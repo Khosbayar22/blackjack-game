@@ -1,4 +1,4 @@
-package Cards;
+package classes.cards;
 
 public class Card
 {

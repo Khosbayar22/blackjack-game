@@ -1,13 +1,12 @@
+package classes.ui;
 import javax.swing.*;
 import java.awt.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import java.io.*;
-
-import Players.*;
-import Cards.*;
+import classes.players.Dealer;
+import classes.players.Player;
 
 public class GamePanel extends JPanel implements ActionListener
 {
@@ -251,7 +250,7 @@ public class GamePanel extends JPanel implements ActionListener
 		table.setNames(dealer.getName(), player.getName());
         table.repaint();
         
-        cardsLeft.setText("Ширээ: " + dealer.cardsLeftInPack() + "/" + (dealer.CARD_PACKS * Cards.CardPack.CARDS_IN_PACK));
+        cardsLeft.setText("Ширээ: " + dealer.cardsLeftInPack() + "/" + (dealer.CARD_PACKS * classes.hands.CardPack.CARDS_IN_PACK));
         
         currentBet.setText(Double.toString(player.getBet()));
         playerWallet.setText(Double.toString(player.getWallet()));

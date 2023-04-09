@@ -1,4 +1,6 @@
-package Cards;
+package classes.hands;
+
+import classes.cards.Card;
 
 public class PlayerCardHand extends CardHand
 {

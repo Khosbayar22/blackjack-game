@@ -1,6 +1,6 @@
-package Players;
+package classes.players;
 
-import Cards.*;
+import classes.hands.*;
 
 public class Dealer extends BlackjackPlayer
 {

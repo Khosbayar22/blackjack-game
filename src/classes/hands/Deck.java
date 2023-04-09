@@ -1,6 +1,8 @@
-package Cards;
+package classes.hands;
 
 import java.util.*;
+
+import classes.cards.Card;
 
 public class Deck extends Stack<Card>
 {

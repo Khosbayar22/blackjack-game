@@ -1,8 +1,6 @@
-package Players;
+package classes.players;
 
-import java.io.*;
-
-public class BlackjackPlayer implements Serializable
+public class BlackjackPlayer
 {
     private String name;
     
@@ -10,14 +8,8 @@ public class BlackjackPlayer implements Serializable
     
     private String gender;
     
-    public BlackjackPlayer()
-    {
-        
-    }
+    public BlackjackPlayer() {}
     
-    /**
-     * Шинэ тоглогч үүсгэх
-     */
     public BlackjackPlayer(String name, int age, String gender)
     {
         setName(name);

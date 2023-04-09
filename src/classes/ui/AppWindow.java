@@ -1,3 +1,4 @@
+package classes.ui;
 import javax.swing.*;
 import java.awt.*;
 
@@ -54,7 +55,6 @@ public class AppWindow extends JFrame
         
         setJMenuBar(menuBar);
         
-		// action listeners
 		dealAction.addActionListener(this);
         hitAction.addActionListener(this);
         doubleAction.addActionListener(this);

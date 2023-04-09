@@ -1,6 +1,8 @@
-package Cards;
+package classes.hands;
 
 import java.util.*;
+
+import classes.cards.Card;
 
 public abstract class CardHand extends Vector<Card>
 {    
@@ -9,9 +11,6 @@ public abstract class CardHand extends Vector<Card>
         super();
     }
     
-    /**
-     * Гарт байгаа хөзөр арилгах
-     */
     public void clear()
     {
         super.clear();

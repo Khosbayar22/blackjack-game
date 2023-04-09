@@ -1,6 +1,9 @@
-package Cards;
+package classes.hands;
 
-public class DealerCardHand extends CardHand
+import classes.cards.Card;
+import interfaces.cardHand;
+
+public class DealerCardHand extends CardHand implements cardHand
 {
     public DealerCardHand()
     {

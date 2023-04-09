@@ -1,10 +1,8 @@
-package Players;
+package classes.players;
 
-import java.io.*;
+import classes.hands.PlayerCardHand;
 
-import Cards.*;
-
-public class Player extends BlackjackPlayer implements Serializable
+public class Player extends BlackjackPlayer
 {
     public transient PlayerCardHand hand = new PlayerCardHand();
     

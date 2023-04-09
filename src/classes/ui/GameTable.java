@@ -1,7 +1,11 @@
+package classes.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
-import Cards.*;
+import classes.cards.Card;
+import classes.hands.CardPack;
+import classes.hands.DealerCardHand;
+import classes.hands.PlayerCardHand;
 
 public class GameTable extends JPanel
 {
@@ -10,7 +14,6 @@ public class GameTable extends JPanel
     
     private boolean showAllDealerCards;
     
-    // drawing position vars
     private final int CARD_INCREMENT = 20;
     private final int CARD_START = 100;
     private final int DEALER_POSITION = 50;
@@ -43,14 +46,14 @@ public class GameTable extends JPanel
         
         for (int i = 0; i < CardPack.CARDS_IN_PACK; i++)
         {
-            String cardName = "card_images/" + (i+1) + ".png";
+            String cardName = "../../assets/cards/" + (i+1) + ".png";
             
             URL urlImg = getClass().getResource(cardName);
             Image cardImage = Toolkit.getDefaultToolkit().getImage(urlImg);
             cardImages[i] = cardImage;
         }
         
-        String backCard = "card_images/red_back.png";
+        String backCard = "../../assets/cards/red_back.png";
         
         URL backCardURL = getClass().getResource(backCard);
         Image backCardImage = Toolkit.getDefaultToolkit().getImage(backCardURL);
@@ -100,8 +103,6 @@ public class GameTable extends JPanel
         g.setFont(handTotalFont);
         
         String cardName;
-    
-        // draw dealer cards
     
         int i = CARD_START;
     

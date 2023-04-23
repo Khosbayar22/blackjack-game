@@ -1,21 +1,19 @@
 package classes.ui;
 import javax.swing.*;
+
+import classes.Game;
+import classes.GameSerializer;
+
 import java.awt.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import classes.players.Dealer;
-import classes.players.Player;
-
-public class GamePanel extends JPanel implements ActionListener
-{
-    private Dealer dealer;
-    private Player player;
-    
+public class GameActions extends JPanel implements ActionListener {
+    private Game game;
     private GameTable table;
     
-    private JButton newGameButton = new JButton("Бооцоо тавих");
+    private JButton newRoundButton = new JButton("Бооцоо тавих");
     private JButton hitButton = new JButton("Шалгах");
     private JButton doubleButton = new JButton("Үржүүлэх");
 	private JButton standButton = new JButton("Зогсох");
@@ -31,7 +29,7 @@ public class GamePanel extends JPanel implements ActionListener
     private JLabel cardsLeft = new JLabel("");
     private JLabel dealerSays = new JLabel("");
     
-    public GamePanel()
+    public GameActions()
     {
         this.setLayout(new BorderLayout());
         
@@ -52,7 +50,7 @@ public class GamePanel extends JPanel implements ActionListener
         dealerPanel.add(dealerSays);
         
         JPanel optionsPanel = new JPanel();
-        optionsPanel.add(newGameButton);
+        optionsPanel.add(newRoundButton);
         optionsPanel.add(hitButton);
         optionsPanel.add(doubleButton);
         optionsPanel.add(standButton);
@@ -70,8 +68,7 @@ public class GamePanel extends JPanel implements ActionListener
         optionsPanel.setOpaque(false);
         bottomItems.setOpaque(false);
         
-        // add listeners to buttons
-        newGameButton.addActionListener(this);
+        newRoundButton.addActionListener(this);
         hitButton.addActionListener(this);
         doubleButton.addActionListener(this);
 		standButton.addActionListener(this);
@@ -81,95 +78,31 @@ public class GamePanel extends JPanel implements ActionListener
 		add10Chip.addActionListener(this);
 		add25Chip.addActionListener(this);
 		add100Chip.addActionListener(this);
-		
-		dealer = new Dealer();
-        player = new Player("Хосбаяр", 32, "Male");
-        player.setWallet(100.00);
-		
-        updateValues();
-    }
-    
-    public void actionPerformed(ActionEvent evt)
-    {
-        String act = evt.getActionCommand();
         
-        if (act.equals("Бооцоо тавих"))
-        {
-            newGame();
-        }
-        else if (act.equals("Шалгах"))
-        {
-            hit();
-        }
-        else if (act.equals("Үржүүлэх"))
-        {
-            playDouble();
-        }
-        else if (act.equals("Зогсох"))
-        {
-            stand();
-        }
-        else if (act.equals("1") || act.equals("5") || act.equals("10") || act.equals("25") || act.equals("100"))
-        {
-            increaseBet(Integer.parseInt(act));
-        }
-        else if (act.equals("Цэвэрлэх"))
-        {
-            clearBet();
-        }
+        game = new Game();
+        game.newGame();
+    }
+    
+    public void update()
+    {
+        dealerSays.setText("<html><p align=\"center\"><font face=\"Roboto\" color=\"white\" style=\"font-size: 20pt\">" + GameSerializer.announcement + "</font></p></html>");
         
-        updateValues();
-    }
-    
-    public void newGame()
-    {
-        dealer.deal(player);
-    }
-    
-    public void hit()
-    {
-        dealer.hit(player);
-    }
-    
-    public void playDouble()
-    {
-        dealer.playDouble(player);
-    }
-    
-    public void stand()
-    {
-        dealer.stand(player);
-    }
-    
-    public void increaseBet(int amount)
-    {
-        dealer.acceptBetFrom(player, amount + player.getBet());
-    }
-    
-    public void clearBet()
-    {
-        player.clearBet();
-    }
-    
-    public void updateValues()
-    {
-        dealerSays.setText("<html><p align=\"center\"><font face=\"Serif\" color=\"white\" style=\"font-size: 20pt\">" + dealer.says() + "</font></p></html>");
-        
-        if (dealer.isGameOver())
+        if (GameSerializer.isGameOver)
         {
-            if (player.betPlaced() && !player.isBankrupt())
+            if (GameSerializer.isBetPlaced && !GameSerializer.isBankrupt)
             {
-                newGameButton.setEnabled(true);
+                newRoundButton.setEnabled(true);
             }
             else
             {
-                newGameButton.setEnabled(false);
+                newRoundButton.setEnabled(false);
             }
+            
             hitButton.setEnabled(false);
             doubleButton.setEnabled(false);
             standButton.setEnabled(false);
             
-            if (player.betPlaced())
+            if (GameSerializer.isBetPlaced)
             {
                 clearBet.setEnabled(true);
             }
@@ -178,7 +111,7 @@ public class GamePanel extends JPanel implements ActionListener
                 clearBet.setEnabled(false);
             }
             
-            if (player.getWallet() >= 1.0)
+            if (GameSerializer.totalWallet >= 1.0)
             {
                 add1Chip.setEnabled(true);
             }
@@ -187,7 +120,7 @@ public class GamePanel extends JPanel implements ActionListener
                 add1Chip.setEnabled(false);
             }
             
-            if (player.getWallet() >= 5)
+            if (GameSerializer.totalWallet >= 5)
             {
                 add5Chip.setEnabled(true);
             }
@@ -196,7 +129,7 @@ public class GamePanel extends JPanel implements ActionListener
                 add5Chip.setEnabled(false);
             }
             
-            if (player.getWallet() >= 10)
+            if (GameSerializer.totalWallet >= 10)
             {
                 add10Chip.setEnabled(true);
             }
@@ -205,7 +138,7 @@ public class GamePanel extends JPanel implements ActionListener
                 add10Chip.setEnabled(false);
             }
             
-            if (player.getWallet() >= 25)
+            if (GameSerializer.totalWallet >= 25)
             {
                 add25Chip.setEnabled(true);
             }
@@ -214,7 +147,7 @@ public class GamePanel extends JPanel implements ActionListener
                 add25Chip.setEnabled(false);
             }
             
-            if (player.getWallet() >= 100)
+            if (GameSerializer.totalWallet >= 100)
             {
                 add100Chip.setEnabled(true);
             }
@@ -225,9 +158,10 @@ public class GamePanel extends JPanel implements ActionListener
         }
         else
         {
-            newGameButton.setEnabled(false);
+            newRoundButton.setEnabled(false);
             hitButton.setEnabled(true);
-            if (dealer.canPlayerDouble(player))
+
+            if (GameSerializer.isCanDouble)
             {
                 doubleButton.setEnabled(true);
             }
@@ -246,13 +180,48 @@ public class GamePanel extends JPanel implements ActionListener
             add100Chip.setEnabled(false);
         }
         
-        table.update(dealer.getHand(), player.getHand(), (dealer.areCardsFaceUp()) ? true : false);
-		table.setNames(dealer.getName(), player.getName());
-        table.repaint();
+        cardsLeft.setText("Үлдсэн хөзрийн тоо: " + GameSerializer.totalCard + "/");
         
-        cardsLeft.setText("Ширээ: " + dealer.cardsLeftInPack() + "/" + (dealer.CARD_PACKS * classes.hands.CardPack.CARDS_IN_PACK));
-        
-        currentBet.setText(Double.toString(player.getBet()));
-        playerWallet.setText(Double.toString(player.getWallet()));
+        currentBet.setText(Double.toString(GameSerializer.totalBet));
+        playerWallet.setText(Double.toString(GameSerializer.totalWallet));
+    }
+    
+    public void actionPerformed(ActionEvent event)
+    {
+        String command = event.getActionCommand();
+        switch (command) {
+            case "Бооцоо тавих":
+                game.newRound();
+                table.repaint();    
+                update();
+                break;
+            case "Шалгах":
+                game.hit();
+                table.repaint();    
+                update();
+                break;
+            case "Үржүүлэх":
+                game.playDouble();
+                table.repaint();    
+                update();
+                break;
+            case "Зогсох":
+                game.stand();
+                table.repaint();    
+                update();
+                break;
+            case "1", "5", "10", "25", "100":
+                game.increaseBet(Integer.parseInt(command));
+                table.repaint();    
+                update();
+                break;
+            case "Цэвэрлэх":
+                game.clearBet();
+                table.repaint();    
+                update();
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown command: " + command);
+        }
     }
 }

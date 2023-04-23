@@ -9,6 +9,13 @@
       "name": "App",
       "request": "launch",
       "mainClass": "App",
+      "projectName": "blackjack-game-java_88ec5754"
+    },
+    {
+      "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "App",
       "projectName": "blackjack-game_2f6992fa"
     },
     {

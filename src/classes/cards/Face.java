@@ -14,7 +14,7 @@ public class Face
         switch (face)
         {
             case 1:
-                setName("Нэг");
+                setName("Тамга");
                 setValue(11);
                 break;
             case 2:
@@ -92,12 +92,12 @@ public class Face
     
     public boolean isAce()
     {
-        return (name.equals("Ace")) ? true : false;
+        return (name.equals("Тамга")) ? true : false;
     }
     
     public boolean isLowAce()
     {
-        return (name.equals("Ace") && getValue() == LOW_ACE) ? true : false;
+        return (name.equals("Тамга") && getValue() == LOW_ACE) ? true : false;
     }
     
     public void switchAce()

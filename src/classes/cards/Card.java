@@ -1,6 +1,8 @@
 package classes.cards;
 
-public class Card
+import interfaces.card;
+
+public class Card implements card
 {
     private Suit suit;
     
@@ -15,7 +17,7 @@ public class Card
         setCode(code);
     }
     
-    private void setFace(Face face)
+    public void setFace(Face face)
     {
         this.face = face;
     }
@@ -25,7 +27,7 @@ public class Card
         return this.face;
     }
     
-    private void setSuit(Suit suit)
+    public void setSuit(Suit suit)
     {
         this.suit = suit;
     }
@@ -35,7 +37,7 @@ public class Card
         return this.suit;
     }
     
-    private void setCode(int code)
+    public void setCode(int code)
     {
         this.code = code;
     }

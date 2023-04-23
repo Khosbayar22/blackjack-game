@@ -1,8 +1,9 @@
 package classes.players;
-
 import classes.hands.PlayerCardHand;
 
-public class Player extends BlackjackPlayer
+import interfaces.player;
+
+public class Player extends BlackjackPlayer implements player
 {
     public transient PlayerCardHand hand = new PlayerCardHand();
     

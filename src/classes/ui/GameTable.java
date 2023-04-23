@@ -2,18 +2,13 @@ package classes.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+
+import classes.GameSerializer;
 import classes.cards.Card;
 import classes.hands.CardPack;
-import classes.hands.DealerCardHand;
-import classes.hands.PlayerCardHand;
 
 public class GameTable extends JPanel
 {
-    private DealerCardHand dealer;
-    private PlayerCardHand player;
-    
-    private boolean showAllDealerCards;
-    
     private final int CARD_INCREMENT = 20;
     private final int CARD_START = 100;
     private final int DEALER_POSITION = 50;
@@ -27,9 +22,6 @@ public class GameTable extends JPanel
     private Font handTotalFont;
     private Font playerNameFont;
     
-    private String dealerName;
-    private String playerName;
-    
     private Image[] cardImages = new Image[CardPack.CARDS_IN_PACK + 1];
     
     public GameTable()
@@ -38,11 +30,10 @@ public class GameTable extends JPanel
         
         this.setBackground(Color.BLUE);
         this.setOpaque(false);
-        
         handTotalFont = new Font("Serif", Font.PLAIN, 96);
         playerNameFont = new Font("Serif", Font.ITALIC, 20);
         
-        showAllDealerCards = true;
+        GameSerializer.showAllDealerCards = true;
         
         for (int i = 0; i < CardPack.CARDS_IN_PACK; i++)
         {
@@ -76,19 +67,6 @@ public class GameTable extends JPanel
         }
     }
     
-    public void setNames(String dealerName, String playerName)
-    {
-        this.dealerName = dealerName;
-        this.playerName = playerName;
-    }
-    
-    public void update(DealerCardHand dealer, PlayerCardHand player, boolean showDealer)
-    {        
-        this.dealer = dealer;
-        this.player = player;
-        this.showAllDealerCards = showDealer;
-    }
-    
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -97,8 +75,8 @@ public class GameTable extends JPanel
         
         g.setFont(playerNameFont);
         
-        g.drawString(dealerName, CARD_START, DEALER_POSITION - NAME_SPACE);
-        g.drawString(playerName, CARD_START, PLAYER_POSITION - NAME_SPACE);
+        g.drawString(GameSerializer.dealerName, CARD_START, DEALER_POSITION - NAME_SPACE);
+        g.drawString(GameSerializer.playerName, CARD_START, PLAYER_POSITION - NAME_SPACE);
         
         g.setFont(handTotalFont);
         
@@ -106,22 +84,22 @@ public class GameTable extends JPanel
     
         int i = CARD_START;
     
-        if (showAllDealerCards)
+        if (GameSerializer.showAllDealerCards)
         {
-            for (Card aCard : dealer)
+            for (Card aCard : GameSerializer.dealerCardHand)
             {
                 g.drawImage(cardImages[aCard.getCode() - 1], i, DEALER_POSITION, this);
 
                 i += CARD_INCREMENT;
             }
         
-            g.drawString(Integer.toString(dealer.getTotal()), i 
+            g.drawString(Integer.toString(GameSerializer.dealerCardHand.getTotal()), i 
                 + CARD_IMAGE_WIDTH + CARD_INCREMENT, DEALER_POSITION 
                 + CARD_IMAGE_HEIGHT);
         }
         else
         {
-            for (Card aCard : dealer)
+            for (Card aCard : GameSerializer.dealerCardHand)
             {
                 g.drawImage(cardImages[CardPack.CARDS_IN_PACK], i, DEALER_POSITION, this);
 
@@ -130,16 +108,11 @@ public class GameTable extends JPanel
         
             try
             {
-                Card topCard = dealer.lastElement();
+                Card topCard = GameSerializer.dealerCardHand.lastElement();
             
                 i -= CARD_INCREMENT;
             
                 g.drawImage(cardImages[topCard.getCode() - 1], i, DEALER_POSITION, this);
-            
-                
-                    
-                //
-                
             }
             catch (Exception e)
             {
@@ -152,13 +125,13 @@ public class GameTable extends JPanel
     
         i = CARD_START;
 
-        for (Card aCard : player)
+        for (Card aCard : GameSerializer.playerCardHand)
         {
             g.drawImage(cardImages[aCard.getCode() - 1], i, PLAYER_POSITION, this);
 
             i += CARD_INCREMENT;
         }
     
-        g.drawString(Integer.toString(player.getTotal()), i + CARD_IMAGE_WIDTH + CARD_INCREMENT, PLAYER_POSITION + CARD_IMAGE_HEIGHT); 
+        g.drawString(Integer.toString(GameSerializer.playerCardHand.getTotal()), i + CARD_IMAGE_WIDTH + CARD_INCREMENT, PLAYER_POSITION + CARD_IMAGE_HEIGHT); 
     }
 }

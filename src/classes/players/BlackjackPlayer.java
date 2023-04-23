@@ -1,6 +1,7 @@
 package classes.players;
 
-public class BlackjackPlayer
+
+public class BlackjackPlayer 
 {
     private String name;
     

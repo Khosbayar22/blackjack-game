@@ -1,8 +1,11 @@
 package classes.players;
 
-import classes.hands.*;
+import classes.hands.DealerCardHand;
+import classes.hands.Deck;
+import classes.hands.PlayerCardHand;
+import interfaces.player;
 
-public class Dealer extends BlackjackPlayer
+public class Dealer extends BlackjackPlayer implements player
 {
     private Deck deck;
     
@@ -22,7 +25,7 @@ public class Dealer extends BlackjackPlayer
     
     public Dealer()
     {
-        super("Bot", 45, "male");
+        super("CPU", 45, "male");
         
         deck = new Deck(CARD_PACKS);
     }
@@ -75,10 +78,9 @@ public class Dealer extends BlackjackPlayer
 
             playerCanDouble = true;
             
+            say("Dealer");
             player.hand = new PlayerCardHand();
             hand = new DealerCardHand();
-            
-            say("Dealer");
             
             player.hand.add(deck.deal());
             this.hand.add(deck.deal());
@@ -151,9 +153,6 @@ public class Dealer extends BlackjackPlayer
         go(player);
     }
     
-    /**
-     * Деалэр ээлж
-     */
     private void go(Player player)
     {
         cardsFaceUp = true;

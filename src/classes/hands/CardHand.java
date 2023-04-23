@@ -3,8 +3,9 @@ package classes.hands;
 import java.util.*;
 
 import classes.cards.Card;
+import interfaces.cardHand;
 
-public abstract class CardHand extends Vector<Card>
+public abstract class CardHand extends Vector<Card> implements cardHand
 {    
     public CardHand()
     {

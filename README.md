@@ -4,7 +4,7 @@ Blackjack game https://github.com/davidwinter/java-blackjack кодыг диза
 
 ## Screenshots
 
-![Class Diagram Screenshot](https://raw.githubusercontent.com/Khosbayar22/blackjack-game/main/screenshots/domain.png?token=GHSAT0AAAAAACBDMHBD65CDFG4OTLHOIGX6ZCFLEUA)
+![Class Diagram Screenshot](https://raw.githubusercontent.com/Khosbayar22/blackjack-game/main/screenshots/domain.png?token=GHSAT0AAAAAACBDMHBCYTNKA2AYVXMA42CCZCFLLRQ)
 
 ![Class Diagram Screenshot](https://raw.githubusercontent.com/Khosbayar22/blackjack-game/main/screenshots/class-diagram.jpg?token=GHSAT0AAAAAACBDMHBDQ4XYFL6DNUSN2VVQZCFLJOA)
 
